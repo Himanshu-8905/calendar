@@ -12,10 +12,12 @@ import { Search, Trash2, Edit } from 'lucide-react';
 function EventList({ isOpen, onClose, events, onEditEvent, onDeleteEvent, selectedDate }) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Filter events based on search term
-  const filteredEvents = events.filter((event) =>
-    event.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter events based on search term or show all if searchTerm is empty
+  const filteredEvents = searchTerm
+    ? events.filter((event) =>
+        event.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : events;
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
